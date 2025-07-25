@@ -1,18 +1,34 @@
 import path from "path";
 import { errorHandler, NotFoundHandler } from "./libs/utils/NotFoundHandler";
 
-import express, {
-  type Request,
-  type Response,
-  // type NextFunction,
-} from "express";
+//middlewares plugins
+import helmet from "helmet";
+import cookieParser from "cookie-parser";
+import { corsMiddleware } from "./libs/middlewares/cors";
+import { generalLimiter } from "./libs/middlewares/rateLimit";
+
+import express, { type Request, type Response } from "express";
 
 const createApp = async (): Promise<express.Express> => {
   const app = express();
-
-  // Middleware
-  app.use(express.json());
+  // Trust proxy for Vercel
+  app.set("trust proxy", 1);
+  // Body parsing middleware
+  app.use(express.json({ limit: "10mb" }));
   app.use(express.urlencoded({ extended: true }));
+
+  // plugins
+  // Rate limiting
+  app.use(
+    helmet({
+      contentSecurityPolicy: process.env.NODE_ENV === "production",
+      crossOriginEmbedderPolicy: false,
+    })
+  );
+  app.use(generalLimiter);
+  app.use(corsMiddleware);
+  // Cookie parser
+  app.use(cookieParser());
 
   // Static assets
   const viewsPath = path.join(process.cwd(), "public", "views");
@@ -34,7 +50,6 @@ const createApp = async (): Promise<express.Express> => {
 
   // Catch-all 404 handler
   app.use(NotFoundHandler);
-
   // Error handling middleware (must be last)
   app.use(errorHandler);
 
