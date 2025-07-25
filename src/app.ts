@@ -1,9 +1,11 @@
+import path from "path";
+import { errorHandler, NotFoundHandler } from "./libs/utils/NotFoundHandler";
+
 import express, {
   type Request,
   type Response,
-  type NextFunction,
+  // type NextFunction,
 } from "express";
-import path from "path";
 
 const createApp = async (): Promise<express.Express> => {
   const app = express();
@@ -22,19 +24,30 @@ const createApp = async (): Promise<express.Express> => {
   });
 
   app.get("/api/health", (_req: Request, res: Response) => {
-    res.status(200).json({ message: "api is working" });
+    res.status(200).json({
+      success: true,
+      message: "Server is healthy",
+      timestamp: new Date().toISOString(),
+      environment: process.env.NODE_ENV,
+    });
   });
+
+  // Catch-all 404 handler
+  app.use(NotFoundHandler);
+
+  // Error handling middleware (must be last)
+  app.use(errorHandler);
 
   // Basic 404 handler
-  app.use((_req: Request, res: Response) => {
-    res.status(404).json({ error: "Not Found" });
-  });
+  // app.use((_req: Request, res: Response) => {
+  //   res.status(404).json({ error: "Not Found" });
+  // });
 
-  // Global error handler
-  app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
-    console.error("Unhandled error:", err);
-    res.status(500).json({ error: "Internal Server Error" });
-  });
+  // // Global error handler
+  // app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
+  //   console.error("Unhandled error:", err);
+  //   res.status(500).json({ error: "Internal Server Error" });
+  // });
 
   return app;
 };

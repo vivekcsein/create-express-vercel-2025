@@ -1,15 +1,22 @@
 import dotenv from "dotenv";
-import appPromise from "./app";
 import process from "process";
+import appPromise from "./app";
+import { envAppConfig } from "./libs/configs/configs.env";
 
 // ✅ Load environment variables early
 dotenv.config();
+
+// Validate essential env variables
+if (!envAppConfig.APP_PORT || !envAppConfig.APP_API_PATH) {
+  console.error("Missing required environment configuration.");
+  process.exit(1);
+}
 
 // ✅ Start server with safe async handling
 const startServer = async (): Promise<void> => {
   try {
     const app = await appPromise;
-    const PORT = 7164;
+    const PORT = envAppConfig.APP_PORT;
 
     app.listen(PORT, () => {
       console.log(`🚀 Server running at http://localhost:${PORT}`);
