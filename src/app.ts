@@ -38,17 +38,6 @@ const createApp = async (): Promise<express.Express> => {
   // Error handling middleware (must be last)
   app.use(errorHandler);
 
-  // Basic 404 handler
-  // app.use((_req: Request, res: Response) => {
-  //   res.status(404).json({ error: "Not Found" });
-  // });
-
-  // // Global error handler
-  // app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
-  //   console.error("Unhandled error:", err);
-  //   res.status(500).json({ error: "Internal Server Error" });
-  // });
-
   return app;
 };
 
