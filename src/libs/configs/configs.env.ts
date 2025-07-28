@@ -1,3 +1,4 @@
+
 import * as dotenv from "dotenv";
 import packageJSON from "../../../package.json";
 
@@ -33,6 +34,12 @@ const _envDBConfig = {
 const _envRedisDBConfig = {
   DB_URL: process.env.DB_REDIS_URL as string,
   DB_TOKEN: process.env.DB_REDIS_TOKEN as string,
+};
+
+//supabase database config
+const _envSupabaseDBConfig = {
+  DB_SUPABASE_URL: process.env.DB_SUPABASE_URL! as string,
+  DB_SUPABASE_ANON_KEY: process.env.DB_SUPABASE_ANON_KEY! as string,
 };
 
 //mail service configs
@@ -88,6 +95,7 @@ const _envGithubConfig = {
 export const envAppConfig = Object.freeze(_envAppConfig);
 export const envDBConfig = Object.freeze(_envDBConfig);
 export const envRedisDBConfig = Object.freeze(_envRedisDBConfig);
+export const envSupabaseDBConfig = Object.freeze(_envSupabaseDBConfig);
 export const envMailServicesConfig = Object.freeze(_envMailServicesConfig);
 export const envJWTConfig = Object.freeze(_envJWTConfig);
 export const envCookieConfig = Object.freeze(_envCookieConfig);
