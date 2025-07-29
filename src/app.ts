@@ -10,7 +10,7 @@ import { errorHandler, NotFoundHandler } from "./libs/utils/NotFoundHandler";
 
 
 //routes handlers
-// import authRoutes from "./api/auth/auth.routes";
+import authRoutes from "./api/auth/auth.routes";
 import testRoutes from "./api/test/test.routes";
 
 const createApp = async (): Promise<express.Express> => {
@@ -45,6 +45,7 @@ const createApp = async (): Promise<express.Express> => {
 
   //register api routes
   app.use('/api/test', testRoutes);
+  app.use('/api/auth', authRoutes);
 
   app.get("/api/health", (_req: Request, res: Response) => {
     res.status(200).json({
