@@ -11,10 +11,7 @@
     "resolveJsonModule": true,
     "sourceMap": true,
     "declaration": true,
-    "outDir": "dist",
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    "outDir": "dist"
   },
   "include": ["api", "src/**/*.ts"],
   "exclude": ["node_modules"]

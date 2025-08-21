@@ -7,8 +7,8 @@ config(); // Must be called before accessing process.env
 
 // ✅ Define schema with defaults and transformations
 const envConfigSchema = z.object({
-  SUPABASE_URL: z.url().trim().default("http://localhost:54321"),
-  SUPABASE_ANON_KEY: z.string().default("anon-key"),
+  REDIS_URL: z.url().trim().default("redis-url"),
+  REDIS_TOKEN: z.string().default("redis-token"),
 });
 
 // ✅ Validate process.env safely
@@ -16,14 +16,14 @@ const parsed = envConfigSchema.safeParse(process.env);
 
 if (!parsed.success) {
   throw new Error(
-    `❌ Invalid supabase environment variables:\n${parsed.error.issues
+    `❌ Invalid redis environment variables:\n${parsed.error.issues
       .map((i) => `• ${i.path.join(".")}: ${i.message}`)
       .join("\n")}`
   );
 }
 
 // ✅ Export validated config
-export const envSupabaseConfig = Object.freeze(parsed.data);
+export const envRedisConfig = Object.freeze(parsed.data);
 
 // ✅ Optional: Export type (for type-safe config)
-export type EnvSupabaseConfig = z.infer<typeof envConfigSchema>;
+export type EnvRedisConfig = z.infer<typeof envConfigSchema>;

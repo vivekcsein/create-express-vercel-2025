@@ -6,11 +6,11 @@ import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import { corsMiddleware } from "./libs/middlewares/cors";
 import { generalLimiter } from "./libs/middlewares/rateLimit";
-import { errorHandler, NotFoundHandler } from "./libs/utils/NotFoundHandler";
 
 //routes handlers
-import authRoutes from "./api/auth/auth.routes";
 import testRoutes from "./api/test/test.routes";
+import authRoutes from "./api/v01/auth/auth.routes";
+import { errorHandler, NotFoundHandler } from "./libs/utils/NotFoundHandler";
 
 const createApp = async (): Promise<express.Express> => {
   const app = express();

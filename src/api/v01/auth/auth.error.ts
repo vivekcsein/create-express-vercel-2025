@@ -1,5 +1,5 @@
-import { AuthError } from "@supabase/supabase-js";
 import { Request, Response } from "express";
+import { AuthError } from "@supabase/supabase-js";
 
 export const errorHandler = async (
   error: unknown,
