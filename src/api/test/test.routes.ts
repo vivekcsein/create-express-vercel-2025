@@ -1,6 +1,6 @@
 // routes/testRoutes.ts
 import { Router } from "express";
-import { supabase } from "../../libs/db/db.supabase";
+import { supabase } from "@/libs/db/db.supabase";
 
 const testRoutes: ReturnType<typeof Router> = Router();
 
