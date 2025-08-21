@@ -1,5 +1,6 @@
 import { VercelRequest, VercelResponse } from "@vercel/node";
 import appPromise from "../src/app";
+import { Express } from "express";
 
 // ✅ Production-ready Vercel handler
 export default async function handler(
@@ -10,7 +11,7 @@ export default async function handler(
     const app = await appPromise;
 
     // Optional: narrow casting if you're certain these types align
-    (app as any)(req, res);
+    (app as Express)(req, res);
   } catch (err) {
     console.error("❌ Error handling Vercel request:", err);
 
