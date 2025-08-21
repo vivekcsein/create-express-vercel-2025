@@ -1,6 +1,6 @@
-import { VercelRequest, VercelResponse } from "@vercel/node";
-import appPromise from "../src/app";
 import { Express } from "express";
+import appPromise from "../src/app";
+import { VercelRequest, VercelResponse } from "@vercel/node";
 
 // ✅ Production-ready Vercel handler
 export default async function handler(

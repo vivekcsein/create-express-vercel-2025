@@ -1,4 +1,3 @@
-"use client";
 import { z } from "zod";
 
 // ✅ Load environment variables from .env file

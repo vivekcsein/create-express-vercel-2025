@@ -8,12 +8,12 @@ import { IUserProfileRoleType } from "../../../types/users";
 import { loginSchema, registrationSchema } from "./auth.schemas";
 
 import {
-  forgotPasswordAuthHelper,
   loginAuthHelper,
   logoutAuthHelper,
   registerAuthHelper,
-  resetPasswordAuthHelper,
   verifyEmailAuthHelper,
+  resetPasswordAuthHelper,
+  forgotPasswordAuthHelper,
 } from "./auth.helper";
 
 //login controller

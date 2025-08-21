@@ -39,7 +39,16 @@ const createApp = async (): Promise<express.Express> => {
 
   // Routes
   app.get(["/", "/index", "/index.html"], (_req: Request, res: Response) => {
-    res.type("html").sendFile(path.join(viewsPath, "index.html"));
+    res
+      .type("html")
+      .set({
+        "Content-Security-Policy":
+          "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'",
+        "Cache-Control": "no-cache, no-store, must-revalidate",
+        Pragma: "no-cache",
+        Expires: "0",
+      })
+      .sendFile(path.join(viewsPath, "index.html"));
   });
 
   //register api routes
