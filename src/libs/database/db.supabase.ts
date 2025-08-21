@@ -1,5 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
-import { envSupabaseConfig } from "../env/env.supabase";
+import { envSupabaseConfig } from "@/libs/env/env.supabase";
 
 const supabaseUrl = envSupabaseConfig.SUPABASE_URL;
 const supabaseKey = envSupabaseConfig.SUPABASE_ANON_KEY;
