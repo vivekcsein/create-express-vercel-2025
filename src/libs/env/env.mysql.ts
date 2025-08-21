@@ -1,6 +1,5 @@
-"server-only";
-import { config } from "dotenv";
 import { z } from "zod";
+import { config } from "dotenv";
 
 // ✅ Load environment variables from .env file
 config(); // Must be called before accessing process.env
